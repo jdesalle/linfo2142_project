@@ -1,0 +1,2 @@
+openssl x509 -req -in linfo2142_serv.csr -CA myCA.pem -CAkey myCA.key \
+-CAcreateserial -out linfo2142_serv.crt -days 825 -sha256 -extfile linfo2142_serv.ext
