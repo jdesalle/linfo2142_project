@@ -38,8 +38,21 @@ We use *Wireshark* to capture QUIC packets and analyze their different character
 
 3) Methodology
 ===============
+We will use a computer connected though a satellite link (starlink) to our web server to perform our measurement. During each measurement process, Wireshark will be monitoring the traffic to allow us to observe the negotiation of the bandwidth and other interesting information about the protocol directly.
 
-4) Configuration of the server
+During each mesurement, we will check the time needed for different things: 
+
+* time for the namelookup 
+* time to connect
+* time to start  the transfer
+* total time
+
+We will study only the downloads, since it's more relevant than uploads for a satellite connection users.
+
+We will repeat each measurement 10 times. We will first try to download a simple blank web page, then we will try to download files with a size ranging form 10kB to 500MB, to see if the size of a file downloaded through the satellite link will impact the performance of the said connection.
+
+
+1) Configuration of the server
 ==============================
 The first step of our configuration is to add your serve in the /etc/host file , and use the domain name linfo2142.serv for our scripts to work. In our case, the ip of our server is 130.104.229.21, the command to do this is  *$ sudo echo "130.104.229.21    linfo2142" >> /etc/hosts*
 
