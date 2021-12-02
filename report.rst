@@ -47,8 +47,7 @@ The next step is to proceed to the installation of our version of nginx. The bas
 
 
 After building nginx, you will have to add it to your path variable. There is multiple way to do this, we choosed to add it in /etc/environement.
-
-You will have to add the files [2] for the measurements in the /var/www/files folder, so that they will be accessible by the server. This repository mus be accessible by any user.
+You will have generates files for the measurement through our script [2] in  /var/www/files folder, so that they will be accessible by the server. This repository mus be accessible by any user.
 
 To run nginx, you wil have to add our nginx.conf [3] file in your nginx repository. You'll also need to put the SSL key [4] and certificate [5] of our server in a folder named "certs" created in the same directory. 
 When that is done, you can run the command  *$ nginx -c nginx.conf* to launch the server.
