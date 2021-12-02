@@ -34,6 +34,14 @@ for i in ['tcp', 'quic']:
         data_i = (data[size]['version'] == i)
         yi.append(data[size][data_i]['time_total'].mean())
         ei.append(data[size][data_i]['time_total'].std())
+        # yi.append(data[size][data_i]['time_connect'].mean())
+        # ei.append(data[size][data_i]['time_connect'].std())
+        # yi.append(data[size][data_i]['time_appconnect'].mean())
+        # ei.append(data[size][data_i]['time_appconnect'].std())
+        # yi.append(data[size][data_i]['time_starttransfer'].mean())
+        # ei.append(data[size][data_i]['time_starttransfer'].std())
+        # yi.append(data[size][data_i]['time_namelookup'].mean())
+        # ei.append(data[size][data_i]['time_namelookup'].std())
     l.append(yi)
     errors.append(ei)
 
@@ -63,4 +71,4 @@ plt.xticks(x,file_sizes)
 
 plt.show()
 
-print("yo")
+print("The end")

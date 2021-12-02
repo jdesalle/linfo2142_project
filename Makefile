@@ -3,3 +3,6 @@ plot:
 
 basicTest:
 	./testScripts/basicSpeedTest.sh
+
+clean: 
+	rm -f *.csv
