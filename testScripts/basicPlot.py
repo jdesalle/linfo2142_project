@@ -58,7 +58,7 @@ plt.errorbar(x,y1,e1,linestyle='None', marker='.')
 plt.plot(x, y2,color="red", linewidth=1.0, linestyle='None', marker='*')
 plt.errorbar(x,y2,e2,linestyle='None',marker='.')
 plt.xlabel('Variable')
-plt.ylabel('total time [s]')
+plt.ylabel('Duration [s]')
 plt.ylim(ymin=0)
 # Donner un titre à votre graphe.
 plt.title("TCP vs QUIC")
@@ -68,7 +68,7 @@ plt.grid(True)
 
 # Ajouter une légende, loc peut prendre différentes valeurs (https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.legend.html)
 
-plt.legend(['TCP','QUIC'], loc = 'upper right')
+plt.legend(['TCP','QUIC'], loc = 'upper left')
 plt.xticks(x,mesurements, rotation='vertical')
 
 plt.show()

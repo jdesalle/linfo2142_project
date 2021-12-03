@@ -52,7 +52,7 @@ We will study only the downloads, since it's more relevant than uploads for a sa
 We will repeat each measurement 10 times. We will first try to download a simple blank web page, then we will try to download files with a size ranging form 10kB to 500MB, to see if the size of a file downloaded through the satellite link will impact the performance of the said connection.
 
 
-1) Configuration of the server
+4) Configuration of the server
 ==============================
 The first step of our configuration is to add your serve in the /etc/host file , and use the domain name linfo2142.serv for our scripts to work. In our case, the ip of our server is 130.104.229.21, the command to do this is  *$ sudo echo "130.104.229.21    linfo2142" >> /etc/hosts*
 
@@ -77,6 +77,13 @@ When that is done, you can run the command  *$ nginx -c nginx.conf* to launch th
 
 5) Results
 ==========
+First, we compared some basic metrics while downloading a blank page
+
+.. image:: images/basicPlot1.png
+    :width: 500
+
+The first thing we notice is the high standard deviation in QUIC compared to TCP, the performance of TCP is more stable/less random than QUIC's.
+
 
 6) Conclusions
 =================
