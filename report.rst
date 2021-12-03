@@ -101,7 +101,7 @@ When trying to download large files (or even non-empty files), the current speed
 It is a random bug, sometimes it works, but most of the time it does not ¯\\\_(ツ)_/¯.
 
 .. image:: images/curlhttp3.png
-    :width: 500
+    :width: 80%
 
 It seems to be a known bug, and since the majority of issues on this topic on github are closed, we did not notice the problem early enough to change our methodology.
 We will try to find another way to download files in http3 for the final deadline.
@@ -118,7 +118,7 @@ We will try to find another way to download files in http3 for the final deadlin
 First, we compared some basic metrics while downloading a blank page
 
 .. image:: images/basicPlot1.png
-    :width: 500
+    :width: 80%
  
 We can see that the average time for downloading the empty file is 0.13652440000000002 s, which corresponds to the time to get an empty packet from the satellite, which will be the minimum delay of our operations. 
 
@@ -127,7 +127,7 @@ The first thing we notice is the high standard deviation in QUIC compared to TCP
 Also, in another test, QUIC seemed to faster than TCP.
 
 .. image:: images/basicPlot2.png
-    :width: 500
+    :width: 80%
 
 This random behavior of QUIC is probably due to the download issue over http3.
 
@@ -135,9 +135,9 @@ Since downloads for empty files seemed to terminate anyway, we decided to make 1
 With 100 iterations, we seemed to have more stable results :
 
 .. image:: images/basicPlot3.png
-    :width: 500
+    :width: 80%
 
-We see that over all QUIC is faster and spend less time to connect : This is probably to QUIC's handshake which uses the mode 0-RTT [1], where the transport, cryptographic handshake and the http3 requests can be sent in a single operation with a 0 Round-Trip Time.
+We see that over all QUIC is faster and spend less time to connect : This is probably to QUIC's handshake which uses the mode 0-RTT [1], where the transport and cryptographic handshake can be sent in a single operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time possible.
 
 [1] https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
 
@@ -156,7 +156,7 @@ The Quiche implementation of QUIC can use both cubic or Hystart++ [1]. In our ca
 For TCP we could measure the influence of the file size (unlike QUIC), the speed is dropping when the file size is increasing. The drop in speed seem to follow the concave growth of a cubic function, which is consistent with the use of the cubic congestion control algorithm
 
 .. image:: images/TCPspeed.png
-    :width: 500
+    :width: 80%
 
 
 7) Conclusions
