@@ -235,14 +235,14 @@ endobj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/)
->> /Border [ 0 0 0 ] /Rect [ 76.59291 395.7175 482.2829 407.7175 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 76.59291 365.7175 482.2829 377.7175 ] /Subtype /Link /Type /Annot
 >>
 endobj
 33 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://blog.cloudflare.com/cubic-and-hystart-support-in-quiche/)
->> /Border [ 0 0 0 ] /Rect [ 76.59291 293.7175 356.1429 305.7175 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 76.59291 263.7175 356.1429 275.7175 ] /Subtype /Link /Type /Annot
 >>
 endobj
 34 0 obj
@@ -292,7 +292,7 @@ endobj
 endobj
 39 0 obj
 <<
-/Author () /CreationDate (D:20211203212059+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20211203212059+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+/Author () /CreationDate (D:20211204120645+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20211204120645+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (Comparing TCP and QUIC through a satellite link) /Trapped /False
 >>
 endobj
@@ -350,12 +350,12 @@ endobj
 endobj
 50 0 obj
 <<
-/Dest [ 34 0 R /XYZ 62.69291 383.7175 0 ] /Next 51 0 R /Parent 48 0 R /Prev 49 0 R /Title (6.2\) Congestion control algorithms)
+/Dest [ 34 0 R /XYZ 62.69291 353.7175 0 ] /Next 51 0 R /Parent 48 0 R /Prev 49 0 R /Title (6.2\) Congestion control algorithms)
 >>
 endobj
 51 0 obj
 <<
-/Dest [ 34 0 R /XYZ 62.69291 281.7175 0 ] /Parent 48 0 R /Prev 50 0 R /Title (6.3\) Influence of file size \(in TCP, see issues\))
+/Dest [ 34 0 R /XYZ 62.69291 251.7175 0 ] /Parent 48 0 R /Prev 50 0 R /Title (6.3\) Influence of file size \(in TCP, see issues\))
 >>
 endobj
 52 0 obj
@@ -759,7 +759,7 @@ endstream
 endobj
 56 0 obj
 <<
-/Length 1958
+/Length 1961
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -827,7 +827,7 @@ q
 1 0 0 1 62.69291 104.9195 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Also, in another test, QUIC seemed to faster than TCP.) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Also, in another test, QUIC seemed to be faster than TCP.) Tj T* ET
 Q
 Q
  
@@ -865,7 +865,7 @@ endstream
 endobj
 58 0 obj
 <<
-/Length 2185
+/Length 2377
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -877,45 +877,52 @@ q
 Q
 Q
 q
-1 0 0 1 62.69291 413.7175 cm
+1 0 0 1 62.69291 437.7175 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL -0.027512 Tw (We see that over all QUIC is faster and spend less time to connect : This is probably to QUIC's handshake) Tj T* 0 Tw .176457 Tw (which uses the mode 0-RTT [1], where the transport and cryptographic handshake can be sent in a single) Tj T* 0 Tw (operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time possible.) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Here, the average time to download empty files is 0.15899407000000004 s) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 395.7175 cm
+1 0 0 1 62.69291 383.7175 cm
 q
-BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg ([1] ) Tj 0 0 .501961 rg (https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/) Tj T* ET
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 1.584488 Tw (We see that over all QUIC is faster and spend less time to connect : This is probably due to QUIC's) Tj T* 0 Tw -0.060016 Tw (handshake which uses the mode 0-RTT [1], where the transport and cryptographic handshake can be sent) Tj T* 0 Tw .352209 Tw (in a single operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time) Tj T* 0 Tw (possible.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 62.69291 365.7175 cm
 q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg ([1] ) Tj 0 0 .501961 rg (https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 335.7175 cm
+q
 BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (6.2\) Congestion control algorithms) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 311.7175 cm
+1 0 0 1 62.69291 281.7175 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL -0.110569 Tw (TCP and QUIC can use the same congestion control algorithms. In our case, both the server and our client) Tj T* 0 Tw .177045 Tw (machine use cubic by default for TCP, it should be the method used. The Quiche implementation of QUIC) Tj T* 0 Tw .752765 Tw (can use both cubic or Hystart++ [1]. In our cases, both TCP and QUIC should use the same congestion) Tj T* 0 Tw (control algorithm: cubic.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 293.7175 cm
+1 0 0 1 62.69291 263.7175 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg ([1] ) Tj 0 0 .501961 rg (https://blog.cloudflare.com/cubic-and-hystart-support-in-quiche/) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 263.7175 cm
+1 0 0 1 62.69291 233.7175 cm
 q
 BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (6.3\) Influence of file size \(in TCP, see issues\)) Tj T* ET
 Q
 Q
 q
-1 0 0 1 62.69291 221.7175 cm
+1 0 0 1 62.69291 191.7175 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .071567 Tw (For TCP we could measure the influence of the file size \(unlike QUIC\), the speed is dropping when the file) Tj T* 0 Tw 1.495542 Tw (size is increasing. The drop in speed seem to follow the concave growth of a cubic function, which is) Tj T* 0 Tw (consistent with the use of the cubic congestion control algorithm) Tj T* ET
@@ -1048,20 +1055,20 @@ xref
 0000146855 00000 n 
 0000153523 00000 n 
 0000159634 00000 n 
-0000161644 00000 n 
-0000162292 00000 n 
-0000164529 00000 n 
-0000165450 00000 n 
-0000165539 00000 n 
-0000165573 00000 n 
-0000165607 00000 n 
-0000165641 00000 n 
-0000165675 00000 n 
-0000165709 00000 n 
+0000161647 00000 n 
+0000162295 00000 n 
+0000164724 00000 n 
+0000165645 00000 n 
+0000165734 00000 n 
+0000165768 00000 n 
+0000165802 00000 n 
+0000165836 00000 n 
+0000165870 00000 n 
+0000165904 00000 n 
 trailer
 <<
 /ID 
-[<4f1d3cf29ca590907474a0369466fcf4><4f1d3cf29ca590907474a0369466fcf4>]
+[<b2a6ada8bb3769f5be94cae2b1914478><b2a6ada8bb3769f5be94cae2b1914478>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
 /Info 39 0 R
@@ -1069,5 +1076,5 @@ trailer
 /Size 67
 >>
 startxref
-165743
+165938
 %%EOF

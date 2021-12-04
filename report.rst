@@ -124,7 +124,7 @@ We can see that the average time for downloading the empty file is 0.13652440000
 
 The first thing we notice is the high standard deviation in QUIC compared to TCP, the performance of TCP is more stable/less random than QUIC's.
 
-Also, in another test, QUIC seemed to faster than TCP.
+Also, in another test, QUIC seemed to be faster than TCP.
 
 .. image:: images/basicPlot2.png
     :width: 80%
@@ -137,7 +137,9 @@ With 100 iterations, we seemed to have more stable results :
 .. image:: images/basicPlot3.png
     :width: 80%
 
-We see that over all QUIC is faster and spend less time to connect : This is probably to QUIC's handshake which uses the mode 0-RTT [1], where the transport and cryptographic handshake can be sent in a single operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time possible.
+Here, the average time to download empty files is 0.15899407000000004 s
+
+We see that over all QUIC is faster and spend less time to connect : This is probably due to QUIC's handshake which uses the mode 0-RTT [1], where the transport and cryptographic handshake can be sent in a single operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time possible.
 
 [1] https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
 
