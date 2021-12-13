@@ -28,10 +28,10 @@ To compare the performance of TCP and QUIC, we decided to download files from ou
 
 Download using QUIC : 
 ```
-curl --http3 -w "@curl-format.txt" -X GET -k  https://130.104.229.21/files/empty_file -o test
+curl --http3 -w "@curl-format.txt" -X GET -k  https://linfo2142-grp2.info.ucl.ac.be/files/empty_file -o test
 ```
 
 Download using TCP : 
 ```
-curl -w "@curl-format.txt" -X GET -k  https://130.104.229.21/files/empty_file -o test
+curl -w "@curl-format.txt" -X GET -k  https://linfo2142-grp2.info.ucl.ac.be/files/empty_file -o test
 ```
