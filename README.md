@@ -13,7 +13,7 @@ To reproduce our experience you need install the following tools with the corres
     - id of the used commit : c8a3046555378f81b22d51e3887df8a5cf1ab5bf
 * https://github.com/quiclog/pcap2qlog 
     - id of the used commit : 62dbd8be1d3a3a040d1f3afc400bebfaa79658d7
-    - You have to apply a patch to make it work (thanks to [François Michel](https://github.com/francoismichel))
+    - You have to apply a patch to make it work (thanks to [François Michel](https://github.com/francoismichel)). You can find the patch in the folder `patch`. You have to move it in your pcap2qlog directory and apply it using `git apply <patch file>`, then you rebuild pcap2qlog using `npx tsc`.
 * Wireshark-Tshark, v3.4.8
 ### Methodology
 
