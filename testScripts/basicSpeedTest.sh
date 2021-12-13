@@ -9,7 +9,7 @@ do
 	for i in {1..10}; #make each mesure 10 time
 	do
 		
-		output=$(~/curl/src/curl -L -w "@curl-format-for-csv.txt" -X GET -k -s https://130.104.229.21/files/${FILENAME} -o test | tail -n 1)
+		output=$(~/curl/src/curl -L -w "@curl-format-for-csv.txt" -X GET -k -s https://linfo2142-grp2.info.ucl.ac.be/files/${FILENAME} -o test | tail -n 1)
         printf '%s\n' $FILENAME tcp $i $output | paste -sd ',' >> basicSpeedTest.csv
 
 	done
