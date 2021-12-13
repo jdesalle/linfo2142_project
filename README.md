@@ -7,9 +7,9 @@ The report of the project can be found in `report.rst`
 
 ### Prerequisite
 To reproduce our experience you need install the following tools with the corresponding versions (see the commit id) :
-* https://github.com/cloudflare/quiche 
+* https://github.com/cloudflare/quiche
     - commit id : c885a71fd58c0c610e9e209f210b1951db81d6c5
-* https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version 
+* https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version
     - commit id : c8a3046555378f81b22d51e3887df8a5cf1ab5bf
 * https://github.com/quiclog/pcap2qlog 
     - commit id : 62dbd8be1d3a3a040d1f3afc400bebfaa79658d7
