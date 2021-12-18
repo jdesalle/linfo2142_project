@@ -1,0 +1,15 @@
+diff --git a/src/parsers/ParserPCAP.ts b/src/parsers/ParserPCAP.ts
+index 1a18bac..32c24a2 100644
+--- a/src/parsers/ParserPCAP.ts
++++ b/src/parsers/ParserPCAP.ts
+@@ -587,8 +587,8 @@ export class ParserPCAP {
+ 
+             if ( packetType === qlog.PacketType.unknown ) {
+                 // some options may pass (e.g., padding/garbage in the rest of the UDP)
+-                if ( Object.keys(rawQuicPacket).length === 2 && 
+-                     rawQuicPacket["quic.packet_length"] && rawQuicPacket["quic.remaining_payload"] ) {
++                if (rawQuicPacket["_ws.expert"] !== undefined && rawQuicPacket["_ws.expert"]["quic.coalesced_padding_data"] !== undefined || (Object.keys(rawQuicPacket).length === 2 && 
++                     rawQuicPacket["quic.packet_length"] && rawQuicPacket["quic.remaining_payload"]) ) {
+                     // garbage, ignore
+                     if ( this.debugging ) {
+                         console.log("convertPacketHeader: Found garbage packet, ignoring", rawQuicPacket);
