@@ -189,7 +189,7 @@ For more information on *qvis*, there is an interesting video of Robin Marx expl
 .. [#] https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
 .. [#] https://github.com/curl/curl/wiki/HTTP3
 
-1) Conclusions
+7) Conclusions
 =================
 For this study, we configured a file server compatible with both QUIC and TCP, on port 443, using NGINX 1.16. We installed a development branch of curl, allowing http3 to be able to get our measurements on a client computer, connected to a Starlink connection.
 Those configurations allowed us to gather some data's in both protocols, which allowed us a basic comparison between them, through a satellite connection. 
