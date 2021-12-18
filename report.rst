@@ -96,7 +96,6 @@ It is a random bug, sometimes it works, but most of the time it does not ¯\\\_(
 .. figure:: images/curlhttp3.png
     :figwidth: 70%
     :align: center
-    :name: my-custom-label
     
     ..
 
