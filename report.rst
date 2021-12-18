@@ -55,13 +55,13 @@ For empty files, we repeated measurements 100 times, after noticing some random 
 ==============================
 The first step of our configuration is to add your serve in the /etc/host file, if you do not have a DNS name attribued to your server. We had a DNS name for our server: linfo2142-grp2.info.ucl.ac.be. For other names, you may have to adpat our scripts. In our case, the IP of our server is 130.104.229.21, the command to do set a host name may look like  *$ sudo echo "130.104.229.21    linfo2142" >> /etc/hosts*
 
-The next step is to proceed to the installation of our version of nginx. The basic explanation for building a nginx 1.16 server with Quiche can be found online [1]. You may have to install some dependencies using your preferred package manager. 
+The next step is to proceed to the installation of our version of nginx. The basic explanation for building a nginx 1.16 server with Quiche can be found online [#]_. You may have to install some dependencies using your preferred package manager. 
 
 
 After building nginx, you will have to add it to your path variable. There are multiple ways to do this, we chose to add it in /etc/environment.
 You will have to generate files for the measurement through our script [#]_ in  /var/www/files folder, so that they will be accessible by the server. This repository must be accessible by any user.
 
-To run nginx, you will have to add our nginx.conf [#]_ file in your nginx repository. You'll also need to put the SSL key [4] and certificate [5] of our server in a folder named "certs" created in the same directory. 
+To run nginx, you will have to add our nginx.conf [#]_ file in your nginx repository. You'll also need to put the SSL key [#]_ and certificate [#]_ of our server in a folder named "certs" created in the same directory. 
 When that is done, you can run the command  *$ nginx -c nginx.conf* to launch the server.
 
 .. [#] https://blog.cloudflare.com/experiment-with-http-3-using-nginx-and-quiche/ 
@@ -82,7 +82,7 @@ However, we had a bug in the second phase of the process : the .json is created 
 
 After a discussion with François Michel and Maxime Piraux, it looks as if it's a bug in pcap2qlog itself.
 
-This issue has been fixed 30 mins before this deadline (thanks to a patch from François Michel). So we will use pcap2qlog for the final deadline.
+Thanks to a patch from (François Michel), this issue was fixed and we were able to use QUIClog.
 
 5.2) Download files over http3
 ------------------------------
@@ -94,12 +94,14 @@ When trying to download large files (or even non-empty files), the current speed
 It is a random bug, sometimes it works, but most of the time it does not ¯\\\_(ツ)_/¯.
 
 .. figure:: images/curlhttp3.png
-    :figwidth: 80%
-    :alt: description
+    :figwidth: 70%
+    :align: center
+    :name: my-custom-label
+    
+    ..
 
-::numref:`cURL using http3` 
-
-
+    **Fig.1 cURL over HTTP3 stopping** 
+ 
 It seems to be a known bug, and since the majority of issues on this topic on github are closed, we did not notice the problem early enough to change our methodology.
 We will try to find another way to download files in http3 for the final deadline.
 
@@ -158,7 +160,37 @@ For TCP we could measure the influence of the file size (unlike QUIC), the speed
     :width: 80%
 
 
-7) Conclusions
+6.4) QUIClog : pcap2qlog and qvis 
+----------------------------------
+
+As explained before, after applying the patch of François Michel, we were able to use pcap2qlog [#]_ to analyze QUIC.
+
+**Reminder** : We capture a traffic using tshark and then convert the .pcap file to a .qlog file using pcap2qlog
+
+For this test, we were also lucky with cURL over HTTP3 and we were able to download a file of 1MB.
+
+After capturing the traffic from the client side and from the server side, we created the .qlog files analysed them using another tool : *qvis* [#]_ .
+
+*qvis* is a very powerful toolsuite for QUIC and HTTP3 visualization.
+
+By using the "Sequence" view and the "Congestion" view in *qvis*, we did not see packet losses or not normal congestion behaviour (we only saw the increasing congestion window). It was espected since we only downloaded file of 1MB.
+In general, we think that we need a more important traffic to see more intresting results with *qvis* : packet losses, flow control, congestion control, multiplexing information ...
+We would have liked to make more important downloads but due to the issues with cURL, it was not possible.
+
+However, *qvis* helped us correct a certain information and dicover another issue with cURL over HTTP3.
+In our first measurement, we also measured the "appconnect time" [#]_ using curl and we have noticed that the average was 0 for QUIC. Our first intuition was to explain it with the use of the 0-RTT [#]_ mode in QUIC, where the transport and cryptographic handshake can be sent in a single operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time possible.
+But *qvis* confirmed that the 0-RTT mode was not used in our case (we can see it in the "Sequence" view). 
+As a result we did not find why HTTP3 has a 0 appconnect time, and after a few research it looked like it is another issue with this version of cURL [#]_ (the appconnect time is still not supported).
+
+For more information on *qvis*, there is an interesting video of Robin Marx explaining how to use it : https://www.youtube.com/watch?v=HQ1uIClmzkU
+
+.. [#] https://github.com/quiclog/pcap2qlog
+.. [#] https://qvis.quictools.info
+.. [#] https://curl.se/libcurl/c/CURLINFO_APPCONNECT_TIME.html
+.. [#] https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
+.. [#] https://github.com/curl/curl/wiki/HTTP3
+
+1) Conclusions
 =================
 For this study, we configured a file server compatible with both QUIC and TCP, on port 443, using NGINX 1.16. We installed a development branch of curl, allowing http3 to be able to get our measurements on a client computer, connected to a Starlink connection.
 Those configurations allowed us to gather some data's in both protocols, which allowed us a basic comparison between them, through a satellite connection. 
