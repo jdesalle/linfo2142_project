@@ -1,7 +1,8 @@
 # \[LINFO2142\] Project : Comparing TCP and QUIC through a satellite link
 Project for LINFO2142, by Samy Bettaieb and Jonathan de Salle
 
-The report of the project can be found in `report.rst`
+The report of the project can be found in `report.rst`.
+
 A specific README is available in each folder when necessary.
 ## Experimental set up
 
