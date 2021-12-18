@@ -171,7 +171,7 @@ Those configurations allowed us to gather some data for both protocols, which al
 
 With this project we also discovered an issue with pcap2qlog and experienced some problems with cURL. Since the cURL branch is still considered experimental, we could've expected some strange behaviour but it was still good to experience it and discover the tool.
 
-A lesson that we learned, to check the "known bugs" or the "issues" of a new tool before using it in our project, it would have saved us a lot of time when we tried to make sense of the issues.
+A lesson that we learned is to check the "known bugs" or the "issues" of a new tool before using it in our project, it would have saved us a lot of time when we tried to make sense of the issues.
 
 8) References
 ==================
