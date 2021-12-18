@@ -5,8 +5,8 @@ import pandas as pd
 
 fig1 = plt.figure()
 
-dataTCP = pd.read_csv("basicSpeedTestTCP.csv",sep=',')
-dataQUIC = pd.read_csv("basicSpeedTestQUIC.csv",sep=',')
+dataTCP = pd.read_csv("../measurements/csv/basicSpeedTestTCP.csv",sep=',')
+dataQUIC = pd.read_csv("../measurements/csv/basicSpeedTestQUIC.csv",sep=',')
 
 dataTCP = dataTCP.drop(['iter'],axis = 1)
 dataQUIC = dataQUIC.drop(['iter'],axis = 1)
@@ -27,7 +27,6 @@ for data,i in [(dataTCP, 'tcp'), (dataQUIC, 'quic')]:
     yi = []
     ei = []
     size = data['file'] == 'empty_file'
-    print(size)
     data_i = (data[size]['version'] == i)
     yi.append(data[size][data_i]['time_namelookup'].mean())
     yi.append(data[size][data_i]['time_connect'].mean())

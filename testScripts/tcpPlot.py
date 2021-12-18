@@ -5,7 +5,7 @@ import pandas as pd
 
 fig1 = plt.figure()
 
-data = pd.read_csv("tcpSpeedTest.csv",sep=',')
+data = pd.read_csv("../measurements/csv/tcpSpeedTest.csv",sep=',')
 
 data = data.drop(['iter'],axis = 1)
 
@@ -33,7 +33,6 @@ for i in ['tcp']:
         if file == 'file_500MB':
             s = 500
         size = data['file'] == file
-        print(size)
         data_i = (data[size]['version'] == i)
         yi.append(s/data[size][data_i]['time_total'].mean())
         ei.append(data[size][data_i]['time_total'].std())
