@@ -42,23 +42,23 @@ We used a computer connected through a satellite link (starlink) to our web serv
 
 During each measurement, we will check the time needed for different things: 
 
-* time for the namelookup (while it is indepeddant of the protocol, it is still part of the total time)
+* time for the name lookup (while it is independant of the protocol, it is still part of the total time)
 * time to connect
 * time to start  the transfer
 * total time
 
-We didn't mesure the app_connect time since there seem to be an ongoing issue in curl with it on http3 [7]
+We didn't measure the app_connect time since there seem to be an ongoing issue in curl with it on http3 [7]
 
-We decided to study only the downloads, since it seem more relevant than uploads in the usercases of the user of a satellite connection.
+We decided to study only the downloads, since it seems more relevant than uploads in the user cases of the user of a satellite connection.
 
-We repeated each measurement 100 times. We will download a simple blank web page, which allowed us to check the time for a simple exchange between the sattelite and our server. 
+We repeated each measurement 100 times. We will download a simple blank web page, which allowed us to check the time for a simple exchange between the satellite and our server. 
 
-We then tried to download files with a size ranging from 1 MB to 500 MB, to see how the size of a the downloaded file through the satellite link impacts the performance of the said connection, but we ran into some issues ( `5) Issues`_).
+We then tried to download files with a size ranging from 1 MB to 500 MB, to see how the size of the downloaded file through the satellite link impacts the performance of the said connection, but we ran into some issues ( `5) Issues`_).
 
 
 4) Configuration of the server
 ==============================
-The first step of our configuration is to add your server in the /etc/host file if you do not have a DNS name attribued to your server. We had a DNS name for our server: linfo2142-grp2.info.ucl.ac.be. For other names, you may have to adpat our scripts. In our case, the IP of our server is 130.104.229.21, the command to do set a host name may look like  *$ sudo echo "130.104.229.21    linfo2142" >> /etc/hosts*
+The first step of our configuration is to add your server in the /etc/host file if you do not have a DNS name attributed to your server. We had a DNS name for our server: linfo2142-grp2.info.ucl.ac.be. For other names, you may have to adpat our scripts. In our case, the IP of our server is 130.104.229.21, the command to do set a host name may look like  *$ sudo echo "130.104.229.21    linfo2142" >> /etc/hosts*
 
 The next step is to proceed to the installation of our version of nginx. The basic explanation for building a nginx 1.16 server with Quiche can be found online [8]. You may have to install some dependencies using your preferred package manager. 
 
@@ -115,7 +115,7 @@ It seems to be a known bug, and since the majority of issues on this topic on gi
     
     Fig.2 TCP vs QUIC, 100 measurements 
  
-While QUIC take more time in the connect phase (QUIC hanshake take more time than TCP handshake), we can see that it seems faster on average. 
+While QUIC take more time in the connect phase (QUIC handshake takes more time than TCP handshake), we can see that it seems faster on average. 
 
 QUIC's performance is also a lot more variable than TCP's speed, it seems very unstable with a high standard deviation. It may be due to the issue with downloads with cURL in HTTP3.
 
@@ -130,7 +130,7 @@ The Quiche implementation of QUIC can use both cubic or Hystart++ [16]. In our c
 6.3) Influence of file size (in TCP, see issues)
 --------------------------------------------------
 
-For TCP we could measure the influence of the file size (unlike QUIC), the speed is dropping when the file size is increasing. The drop in speed seem to follow the concave growth of a cubic function, which is consistent with the use of the cubic congestion control algorithm
+For TCP we could measure the influence of the file size (unlike QUIC), the speed is dropping when the file size is increasing. The drop in speed seems to follow the concave growth of a cubic function, which is consistent with the use of the cubic congestion control algorithm
 
 .. figure:: images/TCPspeed.png
     :figwidth: 70%
@@ -147,15 +147,15 @@ As explained before, after applying the patch of François Michel, we were able 
 
 For this test, we were also lucky with cURL over HTTP3 and we were able to download a file of 1MB multiple times for tests.
 
-After capturing the traffic from the client side and from the server side, we created the .qlog files analysed them using another tool : *qvis* [19] .
+After capturing the traffic from the client side and from the server side, we created the .qlog files analyzed them using another tool : *qvis* [19] .
 
 *qvis* is a very powerful toolsuite for QUIC and HTTP3 visualization.
 
-By using the "Sequence" view and the "Congestion" view in *qvis*, we did not see packet losses or abnormal congestion behaviour (we only saw the increasing congestion window). It was espected since we only downloaded a file of 1MB.
-In general, we think that we need a more important traffic to see more intresting results with *qvis* : packet losses, flow control, congestion control, multiplexing information ...
+By using the "Sequence" view and the "Congestion" view in *qvis*, we did not see packet losses or abnormal congestion behavior (we only saw the increasing congestion window). It was espected since we only downloaded a file of 1MB.
+In general, we think that we need a more important traffic to see more interesting results with *qvis* : packet losses, flow control, congestion control, multiplexing information ...
 We would have liked to make more important downloads but due to the issues with cURL, it was not possible.
 
-However, *qvis* helped us correct a certain information and dicover another issue with cURL over HTTP3.
+However, *qvis* helped us correct a certain information and discover another issue with cURL over HTTP3.
 In our first measurement, we also measured the "appconnect time" [20] using curl and we have noticed that the average was 0 for QUIC. Our first intuition was to explain it with the use of the 0-RTT [21] mode in QUIC, where the transport and cryptographic handshake can be sent in a single operation along with the HTTP3 requests in the first connection, and makes a 0 Round-Trip Time possible.
 
 But *qvis* confirmed that the 0-RTT mode was not used in our case (we can see it in the "Sequence" view). 
@@ -170,7 +170,7 @@ For more information on *qvis*, there is an interesting video of Robin Marx expl
 For this study, we configured a file server compatible with both QUIC and TCP, on port 443, using NGINX 1.16. We installed a development branch of cURL, allowing HTTP3 to be able to get our measurements on a client computer, connected to a Starlink connection.
 Those configurations allowed us to gather some data for both protocols, which allowed us a basic comparison between them, while running through a satellite connection. 
 
-With this project we also discovered an issue with pcap2qlog and experienced some problems with cURL. Since the cURL branch is still considered experimental, we could've expected some strange behaviour but it was still good to experience it and discover the tool.
+With this project we also discovered an issue with pcap2qlog and experienced some problems with cURL. Since the cURL branch is still considered experimental, we could've expected some strange behaviors but it was still good to experience it and discover the tool.
 
 A lesson that we learned is to check the "known bugs" or the "issues" of a new tool before using it in our project, it would have saved us a lot of time when we tried to make sense of the issues.
 
