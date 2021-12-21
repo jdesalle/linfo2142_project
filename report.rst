@@ -8,12 +8,15 @@ by Samy Bettaieb and Jonathan de Salle
 1) Introduction
 ====================
 
-The objective of this project is to compare the performance of TCP [#]_ and one QUIC [#]_ implementation with real servers on the Internet through a satellite link. 
+The objective of this project is to compare the performance of TCP [1] and one QUIC [2] implementation with real servers on the Internet through a satellite link. 
 The measurements should be scripted and automatically analyzed to be easily performed and reproduced.
 
 We decided to restrict ourselves to measuring the performance of both protocols in the case of a download from the satellite link, and will not measure the performances on the upload.  
 
-You can find the different files created for the project at the link https://github.com/jdesalle/linfo2142_project . 
+In this report we will present the tools that we used for the project, our testing methodology, some information on how we configured our server, the issues that we encountered, our results and a small conclusion.
+
+You can find the different files created for the project on our github repository. You'll also find more information on the tools and the methodology in the README of the project. 
+https://github.com/jdesalle/linfo2142_project . 
 
 
 2) Tools
@@ -21,11 +24,11 @@ You can find the different files created for the project at the link https://git
 
 To perform the measurements, we use several tools, which will be described in this section .
 
-We have chosen to use cloudflare's implementation of QUIC: *Quiche* [#]_  . We opted for that implementation, since it is compatible with a version of  *cURL* [#]_, which we use to perform our measurements.
+We have chosen to use cloudflare's implementation of QUIC: *Quiche* [3]  . We opted for that implementation, since it is compatible with a version of  *cURL* [4], which we use to perform our measurements.
 
 To have a better control over our measurements, we implemented a web server using *Nginx 1.16*. The choice of the specific 1.16 version is because a patch for this version exists to use it with Quiche, which is the QUIC implementation we are using through this project. While Nginx has its own implementation of QUIC, we chose to keep a same implementation for the whole project. 
 
-We use *Wireshark* [#]_ and especially its CLI interface *tshark* to capture packets and analyze their different characteristics. We will also use *QUIClog* [#]_ to analyze these packets.
+We use *Wireshark* [5] and especially its CLI interface *tshark* (v3.4.8) to capture packets and analyze their different characteristics. We will also use *QUIClog* [6] to analyze these packets.
 
 Characteristics of the computer we used as our client for the tests :
     * Operating System: Ubuntu 20.04.3 LTS
@@ -44,7 +47,7 @@ During each measurement, we will check the time needed for different things:
 * time to start  the transfer
 * total time
 
-We didn't mesure the app_connect time since there seem to be an ongoing issue in curl with it on http3 [#]_
+We didn't mesure the app_connect time since there seem to be an ongoing issue in curl with it on http3 [7]
 
 We decided to study only the downloads, since it seem more relevant than uploads in the usercases of the user of a satellite connection.
 
@@ -57,13 +60,13 @@ We then tried to download files with a size ranging from 1 MB to 500 MB, to see 
 ==============================
 The first step of our configuration is to add your server in the /etc/host file if you do not have a DNS name attribued to your server. We had a DNS name for our server: linfo2142-grp2.info.ucl.ac.be. For other names, you may have to adpat our scripts. In our case, the IP of our server is 130.104.229.21, the command to do set a host name may look like  *$ sudo echo "130.104.229.21    linfo2142" >> /etc/hosts*
 
-The next step is to proceed to the installation of our version of nginx. The basic explanation for building a nginx 1.16 server with Quiche can be found online [#]_. You may have to install some dependencies using your preferred package manager. 
+The next step is to proceed to the installation of our version of nginx. The basic explanation for building a nginx 1.16 server with Quiche can be found online [8]. You may have to install some dependencies using your preferred package manager. 
 
 
 After building nginx, you will have to add it to your path variable. There are multiple ways to do this, we chose to add it in /etc/environment.
-You will have to generate files for the measurement through our script [#]_ in  /var/www/files folder, so that they will be accessible by the server. This repository must be accessible by any user.
+You will have to generate files for the measurement through our script [9] in  /var/www/files folder, so that they will be accessible by the server. This repository must be accessible by any user.
 
-To run nginx, you will have to add our nginx.conf [#]_ file in your nginx repository. You'll also need to put the SSL key [#]_ and certificate [#]_ of our server in a folder named "certs" created in the same directory. 
+To run nginx, you will have to add our nginx.conf [10] file in your nginx repository. You'll also need to put the SSL key [11] and certificate [12] of our server in a folder named "certs" created in the same directory. 
 When that is done, you can run the command  *$ nginx -c nginx.conf* to launch the server.
 
 
@@ -72,38 +75,36 @@ When that is done, you can run the command  *$ nginx -c nginx.conf* to launch th
 
 5.1) QUIClog
 ------------
-To analyze QUIC further, we tried to look at QUIClog. Since we are using an NGINX server and cURL to download files, we thought that the most straightforward way to do it is to use pcap2qlog [#]_ .
+To analyze QUIC further, we tried to look at QUIClog. Since we are using an NGINX server and cURL to download files, we thought that the most straightforward way to do it is to use pcap2qlog [13] .
 
 When using pcap2qlog, the pcap is parsed and a json file is created. That json file is then parsed and a .qlog file is created.
 However, we had a bug in the second phase of the process : the .json is created correctly and the packets are decrypted (using the TLS session keys) but when creating the qlog file we had and error "Error: convertPacketHeader: unknown QUIC packet type found!  : [object Object]".
 
 After a discussion with `François Michel <https://github.com/francoismichel>`_  and `Maxime Piraux <https://github.com/mpiraux>`_, it seemed to be a bug in pcap2qlog itself .
 
-Thanks to a patch [#]_ from François Michel, this issue was fixed and we were able to use QUIClog.
+Thanks to a patch [14] from François Michel, this issue was fixed and we were able to use QUIClog.
 
 
 5.2) Download files over http3
 ------------------------------
 We tried to check the influence of the size of a file on the speed and packet loss for each protocol. For this we tried to create files of different sizes (empty, 1 MB, 100 MB, 250 MB, 500 MB) to download. 
-Unfortunately, curl seems to have a problem with
-big files in HTTP3 [#]_, which didn't allow making the measurement using QUIC with non-empty files.
+Unfortunately, curl seems to have a problem with big files in HTTP3 [15], which didn't allow making the measurement using QUIC for non-empty files.
 
 When trying to download large files (or even non-empty files), the current speed drops to 0 and it looks like the download does not terminate even after 3 hours (see Fig.1).
 
-The size for which it starts not working is not clear, it is a random bug, sometimes it works, but most of the time it does not.
-
 .. figure:: images/curlhttp3.png
-    :figwidth: 80%
+    :scale: 200%
     :align: center
     
     Fig.1 cURL over HTTP3 stopping
+
  
+The size for which it starts not working is not clear, it is a random bug, sometimes it works, but most of the time it does not.
+
 It seems to be a known bug, and since the majority of issues on this topic on github are closed, we did not notice the problem early enough to change our methodology.
-We will try to find another way to download files in http3 for the final deadline.
 
 
-
-1) Results
+6) Results
 ==========
 
 6.1) Time measurements
@@ -116,12 +117,12 @@ We will try to find another way to download files in http3 for the final deadlin
  
 While QUIC take more time in the connect phase (QUIC hanshake take more time than TCP handshake), we can see that it seems faster on average. 
 
-QUIC's performance is also a lot more variable than TCP speed, it seems very unstable with a high standard deviation. It may be due to the issue with downloads with cURL in HTTP3.
+QUIC's performance is also a lot more variable than TCP's speed, it seems very unstable with a high standard deviation. It may be due to the issue with downloads with cURL in HTTP3.
 
 6.2) Congestion control algorithms
 -----------------------------------
 TCP and QUIC can use the same congestion control algorithms. In our case, both the server and our client machine use cubic by default for TCP, it should be the method used.
-The Quiche implementation of QUIC can use both cubic or Hystart++ [#]_. In our cases, both TCP and QUIC should use the same congestion control algorithm: cubic.
+The Quiche implementation of QUIC can use both cubic or Hystart++ [16]. In our cases, both TCP and QUIC should use the same congestion control algorithm: cubic.
 
 
 
@@ -140,13 +141,13 @@ For TCP we could measure the influence of the file size (unlike QUIC), the speed
 6.4) QUIClog : pcap2qlog and qvis 
 ----------------------------------
 
-As explained before, after applying the patch of François Michel, we were able to use pcap2qlog [#]_ to analyze QUIC.
+As explained before, after applying the patch of François Michel, we were able to use pcap2qlog [17] to analyze QUIC.
 
-**Reminder** : We capture traffic using tshark and then convert the .pcap file to a .qlog file using pcap2qlog. More info in our README file [#]_ .
+**Reminder** : We capture traffic using tshark and then convert the .pcap file to a .qlog file using pcap2qlog. More info in our README file [18] .
 
 For this test, we were also lucky with cURL over HTTP3 and we were able to download a file of 1MB multiple times for tests.
 
-After capturing the traffic from the client side and from the server side, we created the .qlog files analysed them using another tool : *qvis* [#]_ .
+After capturing the traffic from the client side and from the server side, we created the .qlog files analysed them using another tool : *qvis* [19] .
 
 *qvis* is a very powerful toolsuite for QUIC and HTTP3 visualization.
 
@@ -155,16 +156,16 @@ In general, we think that we need a more important traffic to see more intrestin
 We would have liked to make more important downloads but due to the issues with cURL, it was not possible.
 
 However, *qvis* helped us correct a certain information and dicover another issue with cURL over HTTP3.
-In our first measurement, we also measured the "appconnect time" [#]_ using curl and we have noticed that the average was 0 for QUIC. Our first intuition was to explain it with the use of the 0-RTT [#]_ mode in QUIC, where the transport and cryptographic handshake can be sent in a single operation along with the http3 requests in the first connection and makes a 0 Round-Trip Time possible.
+In our first measurement, we also measured the "appconnect time" [20] using curl and we have noticed that the average was 0 for QUIC. Our first intuition was to explain it with the use of the 0-RTT [21] mode in QUIC, where the transport and cryptographic handshake can be sent in a single operation along with the HTTP3 requests in the first connection, and makes a 0 Round-Trip Time possible.
 
 But *qvis* confirmed that the 0-RTT mode was not used in our case (we can see it in the "Sequence" view). 
-As a result we did not find why HTTP3 has a 0 appconnect time, and after a few research it looked like it is another issue with this version of cURL [7]_ (the appconnect time is still not supported).
+As a result we did not find why HTTP3 has a 0 appconnect time, and after a few research it looked like it is another issue with this version of cURL [7] (the appconnect time is still not supported).
 
 For more information on *qvis*, there is an interesting video of Robin Marx explaining how to use it : https://www.youtube.com/watch?v=HQ1uIClmzkU
 
 
 
-7) Conclusions
+7) Conclusion
 =================
 For this study, we configured a file server compatible with both QUIC and TCP, on port 443, using NGINX 1.16. We installed a development branch of cURL, allowing HTTP3 to be able to get our measurements on a client computer, connected to a Starlink connection.
 Those configurations allowed us to gather some data for both protocols, which allowed us a basic comparison between them, while running through a satellite connection. 
@@ -176,24 +177,46 @@ A lesson that we learned is to check the "known bugs" or the "issues" of a new t
 8) References
 ==================
 
-.. [#] https://datatracker.ietf.org/doc/html/rfc793
-.. [#] https://datatracker.ietf.org/doc//html/rfc9000/
-.. [#] https://github.com/cloudflare/quiche 
-.. [#] https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version
-.. [#] https://www.wireshark.org/
-.. [#] https://github.com/quiclog
-.. [#] https://github.com/curl/curl/wiki/HTTP3#still-doesnt-work
-.. [#] https://blog.cloudflare.com/experiment-with-http-3-using-nginx-and-quiche/ 
-.. [#] https://github.com/jdesalle/linfo2142_project/blob/main/files/generate.sh
-.. [#] https://github.com/jdesalle/linfo2142_project/blob/main/nginx.conf
-.. [#] https://github.com/jdesalle/linfo2142_project/blob/main/certs/server_cert/linfo2142_serv.key
-.. [#] https://github.com/jdesalle/linfo2142_project/blob/main/certs/server_cert/linfo2142_serv.crt
-.. [#] https://github.com/quiclog/pcap2qlog
-.. [#] https://github.com/jdesalle/linfo2142_project/blob/main/patchForPcapToQlog/fix_qlog_parsing.patch
-.. [#] https://curl.se/docs/knownbugs.html#HTTP3
-.. [#] https://blog.cloudflare.com/cubic-and-hystart-support-in-quiche/
-.. [#] https://github.com/quiclog/pcap2qlog
-.. [#] https://github.com/jdesalle/linfo2142_project
-.. [#] https://qvis.quictools.info
-.. [#] https://curl.se/libcurl/c/CURLINFO_APPCONNECT_TIME.html
-.. [#] https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
+
+
+[1] https://datatracker.ietf.org/doc/html/rfc793
+
+[2] https://datatracker.ietf.org/doc//html/rfc9000/
+
+[3] https://github.com/cloudflare/quiche
+
+[4] https://github.com/curl/curl/blob/master/docs/HTTP3.md#quiche-version
+
+[5] https://www.wireshark.org/
+
+[6] https://github.com/quiclog
+
+[7] https://github.com/curl/curl/wiki/HTTP3#still-doesnt-work
+
+[8] https://blog.cloudflare.com/experiment-with-http-3-using-nginx-and-quiche/
+
+[9] https://github.com/jdesalle/linfo2142_project/blob/main/files/generate.sh
+
+[10] https://github.com/jdesalle/linfo2142_project/blob/main/nginx.conf
+
+[11] https://github.com/jdesalle/linfo2142_project/blob/main/certs/server_cert/linfo2142_serv.key
+
+[12] https://github.com/jdesalle/linfo2142_project/blob/main/certs/server_cert/linfo2142_serv.crt
+
+[13] https://github.com/quiclog/pcap2qlog
+
+[14] https://github.com/jdesalle/linfo2142_project/blob/main/patchForPcapToQlog/fix_qlog_parsing.patch
+
+[15] https://curl.se/docs/knownbugs.html#HTTP3
+
+[16] https://blog.cloudflare.com/cubic-and-hystart-support-in-quiche/
+
+[17] https://github.com/quiclog/pcap2qlog
+
+[18] https://github.com/jdesalle/linfo2142_project
+
+[19] https://qvis.quictools.info
+
+[20] https://curl.se/libcurl/c/CURLINFO_APPCONNECT_TIME.html
+
+[21] https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
