@@ -311,7 +311,7 @@ endobj
 endobj
 43 0 obj
 <<
-/Author () /CreationDate (D:20211221115356+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20211221115356+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+/Author () /CreationDate (D:20211221115940+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20211221115940+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title (Comparing TCP and QUIC through a satellite link) /Trapped /False
 >>
 endobj
@@ -399,7 +399,7 @@ endobj
 endobj
 60 0 obj
 <<
-/Length 7062
+/Length 7089
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -615,7 +615,7 @@ q
 1 0 0 1 23 -3 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (time for the namelookup \(while it is indepeddant of the protocol, it is still part of the total time\)) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (time for the name lookup \(while it is independant of the protocol, it is still part of the total time\)) Tj T* ET
 Q
 Q
 q
@@ -697,10 +697,10 @@ q
 1 0 0 1 62.69291 107.0236 cm
 Q
 q
-1 0 0 1 62.69291 89.02362 cm
+1 0 0 1 62.69291 77.02362 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (We didn't mesure the app_connect time since there seem to be an ongoing issue in curl with it on http3 [7]) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .495777 Tw (We didn't measure the app_connect time since there seem to be an ongoing issue in curl with it on http3) Tj T* 0 Tw ([7]) Tj T* ET
 Q
 Q
  
@@ -716,20 +716,20 @@ q
 1 0 0 1 62.69291 741.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL -0.018902 Tw (We decided to study only the downloads, since it seem more relevant than uploads in the usercases of the) Tj T* 0 Tw (user of a satellite connection.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .475542 Tw (We decided to study only the downloads, since it seems more relevant than uploads in the user cases of) Tj T* 0 Tw (the user of a satellite connection.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 62.69291 711.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .08561 Tw (We repeated each measurement 100 times. We will download a simple blank web page, which allowed us) Tj T* 0 Tw (to check the time for a simple exchange between the sattelite and our server.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .08561 Tw (We repeated each measurement 100 times. We will download a simple blank web page, which allowed us) Tj T* 0 Tw (to check the time for a simple exchange between the satellite and our server.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 62.69291 669.0236 cm
 q
-BT 1 0 0 1 0 26 Tm 1.000425 Tw 12 TL /F1 10 Tf 0 0 0 rg (We then tried to download files with a size ranging from 1 MB to 500 MB, to see how the size of a the) Tj T* 0 Tw .53436 Tw (downloaded file through the satellite link impacts the performance of the said connection, but we ran into) Tj T* 0 Tw (some issues \( ) Tj 0 0 .501961 rg (5\) Issues) Tj 0 0 0 rg (\).) Tj T* ET
+BT 1 0 0 1 0 26 Tm 1.424989 Tw 12 TL /F1 10 Tf 0 0 0 rg (We then tried to download files with a size ranging from 1 MB to 500 MB, to see how the size of the) Tj T* 0 Tw .53436 Tw (downloaded file through the satellite link impacts the performance of the said connection, but we ran into) Tj T* 0 Tw (some issues \( ) Tj 0 0 .501961 rg (5\) Issues) Tj 0 0 0 rg (\).) Tj T* ET
 Q
 Q
 q
@@ -741,7 +741,7 @@ Q
 q
 1 0 0 1 62.69291 582.0236 cm
 q
-BT 1 0 0 1 0 38 Tm .237262 Tw 12 TL /F1 10 Tf 0 0 0 rg (The first step of our configuration is to add your server in the /etc/host file if you do not have a DNS name) Tj T* 0 Tw 1.96284 Tw (attribued to your server. We had a DNS name for our server: linfo2142-grp2.info.ucl.ac.be. For other) Tj T* 0 Tw 2.048876 Tw (names, you may have to adpat our scripts. In our case, the IP of our server is 130.104.229.21, the) Tj T* 0 Tw (command to do set a host name may look like ) Tj /F3 10 Tf ($ sudo echo "130.104.229.21 linfo2142" >) Tj (> /etc/hosts) Tj T* ET
+BT 1 0 0 1 0 38 Tm .237262 Tw 12 TL /F1 10 Tf 0 0 0 rg (The first step of our configuration is to add your server in the /etc/host file if you do not have a DNS name) Tj T* 0 Tw 1.764269 Tw (attributed to your server. We had a DNS name for our server: linfo2142-grp2.info.ucl.ac.be. For other) Tj T* 0 Tw 2.048876 Tw (names, you may have to adpat our scripts. In our case, the IP of our server is 130.104.229.21, the) Tj T* 0 Tw (command to do set a host name may look like ) Tj /F3 10 Tf ($ sudo echo "130.104.229.21 linfo2142" >) Tj (> /etc/hosts) Tj T* ET
 Q
 Q
 q
@@ -831,7 +831,7 @@ endstream
 endobj
 62 0 obj
 <<
-/Length 2062
+/Length 2066
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -916,7 +916,7 @@ q
 1 0 0 1 62.69291 177.2562 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .25936 Tw (While QUIC take more time in the connect phase \(QUIC hanshake take more time than TCP handshake\),) Tj T* 0 Tw (we can see that it seems faster on average.) Tj T* ET
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 3.426651 Tw (While QUIC take more time in the connect phase \(QUIC handshake takes more time than TCP) Tj T* 0 Tw (handshake\), we can see that it seems faster on average.) Tj T* ET
 Q
 Q
 q
@@ -931,7 +931,7 @@ endstream
 endobj
 63 0 obj
 <<
-/Length 4239
+/Length 4242
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -958,7 +958,7 @@ q
 1 0 0 1 62.69291 621.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .071567 Tw (For TCP we could measure the influence of the file size \(unlike QUIC\), the speed is dropping when the file) Tj T* 0 Tw 1.495542 Tw (size is increasing. The drop in speed seem to follow the concave growth of a cubic function, which is) Tj T* 0 Tw (consistent with the use of the cubic congestion control algorithm) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .071567 Tw (For TCP we could measure the influence of the file size \(unlike QUIC\), the speed is dropping when the file) Tj T* 0 Tw 1.217765 Tw (size is increasing. The drop in speed seems to follow the concave growth of a cubic function, which is) Tj T* 0 Tw (consistent with the use of the cubic congestion control algorithm) Tj T* ET
 Q
 Q
 q
@@ -1017,7 +1017,7 @@ Q
 q
 1 0 0 1 62.69291 203.3315 cm
 q
-BT 1 0 0 1 0 14 Tm .259987 Tw 12 TL /F1 10 Tf 0 0 0 rg (After capturing the traffic from the client side and from the server side, we created the .qlog files analysed) Tj T* 0 Tw (them using another tool : ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf ( [19] .) Tj T* ET
+BT 1 0 0 1 0 14 Tm .259987 Tw 12 TL /F1 10 Tf 0 0 0 rg (After capturing the traffic from the client side and from the server side, we created the .qlog files analyzed) Tj T* 0 Tw (them using another tool : ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf ( [19] .) Tj T* ET
 Q
 Q
 q
@@ -1029,13 +1029,13 @@ Q
 q
 1 0 0 1 62.69291 119.3315 cm
 q
-BT 1 0 0 1 0 50 Tm 2.447045 Tw 12 TL /F1 10 Tf 0 0 0 rg (By using the "Sequence" view and the "Congestion" view in ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf (, we did not see packet losses or) Tj T* 0 Tw 1.00229 Tw (abnormal congestion behaviour \(we only saw the increasing congestion window\). It was espected since) Tj T* 0 Tw .372488 Tw (we only downloaded a file of 1MB. In general, we think that we need a more important traffic to see more) Tj T* 0 Tw .337126 Tw (intresting results with ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf ( : packet losses, flow control, congestion control, multiplexing information ... We) Tj T* 0 Tw (would have liked to make more important downloads but due to the issues with cURL, it was not possible.) Tj T* ET
+BT 1 0 0 1 0 50 Tm 2.447045 Tw 12 TL /F1 10 Tf 0 0 0 rg (By using the "Sequence" view and the "Congestion" view in ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf (, we did not see packet losses or) Tj T* 0 Tw .216412 Tw (abnormal congestion behavior \(we only saw the increasing congestion window\). It was espected since we) Tj T* 0 Tw 1.21104 Tw (only downloaded a file of 1MB. In general, we think that we need a more important traffic to see more) Tj T* 0 Tw -0.060017 Tw (interesting results with ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf ( : packet losses, flow control, congestion control, multiplexing information ... We) Tj T* 0 Tw (would have liked to make more important downloads but due to the issues with cURL, it was not possible.) Tj T* ET
 Q
 Q
 q
 1 0 0 1 62.69291 77.3315 cm
 q
-BT 1 0 0 1 0 26 Tm -0.12189 Tw 12 TL /F1 10 Tf 0 0 0 rg (However, ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf ( helped us correct a certain information and dicover another issue with cURL over HTTP3. In) Tj T* 0 Tw .438735 Tw (our first measurement, we also measured the "appconnect time" [20] using curl and we have noticed that) Tj T* 0 Tw .990941 Tw (the average was 0 for QUIC. Our first intuition was to explain it with the use of the 0-RTT [21] mode in) Tj T* 0 Tw ET
+BT 1 0 0 1 0 26 Tm .277984 Tw 12 TL /F1 10 Tf 0 0 0 rg (However, ) Tj /F3 10 Tf (qvis) Tj /F1 10 Tf ( helped us correct a certain information and discover another issue with cURL over HTTP3.) Tj T* 0 Tw .959985 Tw (In our first measurement, we also measured the "appconnect time" [20] using curl and we have noticed) Tj T* 0 Tw .061353 Tw (that the average was 0 for QUIC. Our first intuition was to explain it with the use of the 0-RTT [21] mode in) Tj T* 0 Tw ET
 Q
 Q
  
@@ -1082,7 +1082,7 @@ q
 1 0 0 1 62.69291 528.0236 cm
 q
 0 0 0 rg
-BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .165984 Tw (With this project we also discovered an issue with pcap2qlog and experienced some problems with cURL.) Tj T* 0 Tw .039983 Tw (Since the cURL branch is still considered experimental, we could've expected some strange behaviour but) Tj T* 0 Tw (it was still good to experience it and discover the tool.) Tj T* ET
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .165984 Tw (With this project we also discovered an issue with pcap2qlog and experienced some problems with cURL.) Tj T* 0 Tw .079983 Tw (Since the cURL branch is still considered experimental, we could've expected some strange behaviors but) Tj T* 0 Tw (it was still good to experience it and discover the tool.) Tj T* ET
 Q
 Q
 q
@@ -1320,20 +1320,20 @@ xref
 0000084878 00000 n 
 0000084994 00000 n 
 0000085082 00000 n 
-0000092196 00000 n 
-0000097876 00000 n 
-0000099990 00000 n 
-0000104281 00000 n 
-0000110684 00000 n 
-0000110761 00000 n 
+0000092223 00000 n 
+0000097903 00000 n 
+0000100021 00000 n 
+0000104315 00000 n 
+0000110718 00000 n 
 0000110795 00000 n 
 0000110829 00000 n 
 0000110863 00000 n 
 0000110897 00000 n 
+0000110931 00000 n 
 trailer
 <<
 /ID 
-[<16d39bec77c2a391bcd28fe520abe304><16d39bec77c2a391bcd28fe520abe304>]
+[<c677be13d7ef8f7c18addd5b4a6416ed><c677be13d7ef8f7c18addd5b4a6416ed>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
 /Info 43 0 R
@@ -1341,5 +1341,5 @@ trailer
 /Size 71
 >>
 startxref
-110931
+110965
 %%EOF
